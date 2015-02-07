@@ -9,6 +9,11 @@ import System.IO
 
 import Web.Scotty
 
+-- | 'fileServer' takes a path to a directory and serves
+--   the contents of that directory. HTML files have an appropriate
+--   content type but no other guarantees of that sort are made.
+--
+--   Make sure you don't serve something you don't want to be public!
 fileServer :: FilePath -> ScottyM ()
 fileServer basePath = get (capture "/:filename") $ do
   fileName <- fmap (basePath </>) $ param "filename"
